@@ -89,43 +89,43 @@ figure
 hold on
 grid on
 for i=1:300
-phi0 = pi-xycrossphi(i);
-r0=xycrossr(i);
-rs = 1;
-h = 0.00001;
-dr = deltar(i);
+    phi0 = pi-xycrossphi(i);
+    r0=xycrossr(i);
+    rs = 1;
+    h = 0.00001;
+    dr = deltar(i);
 
-u0 = rs/r0;
-phi = phi0 + h;
-u1 = rs/(r0+dr);
-u = [u0, u1];
-r = [r0, r0+dr];
-phir = [phi0, phi];
-x = [r0*cos(phi0), r(1)*cos(phi)];
-y = [r0*sin(phi0), r(1)*sin(phi)];
-yn = 1;
-while yn == 1
-    u2 = (2+((h^2)*(((3/2)*u1)-1)))*u1-u0;
-    u(end+1)=u2;
-    u0 = u1;
-    u1 = u2;
-    phi = phi + h;    
-    if rs/u2 > 1
-        phir(end+1)=phi;
-        r(end+1)=rs/u2;
-        x(end+1)=(rs/u2)*cos(phi);
-        y(end+1)=(rs/u2)*sin(phi);
-    elseif rs/u2 == 1
-        phir(end+1)=phi;
-        r(end+1)=rs/u2;
-        x(end+1)=(rs/u2)*cos(phi);
-        y(end+1)=(rs/u2)*sin(phi);
-        yn = 0;
-    else
-        yn = 0;
+    u0 = rs/r0;
+    phi = phi0 + h;
+    u1 = rs/(r0+dr);
+    u = [u0, u1];
+    r = [r0, r0+dr];
+    phir = [phi0, phi];
+    x = [r0*cos(phi0), r(1)*cos(phi)];
+    y = [r0*sin(phi0), r(1)*sin(phi)];
+    yn = 1;
+    while yn == 1
+        u2 = (2+((h^2)*(((3/2)*u1)-1)))*u1-u0;
+        u(end+1)=u2;
+        u0 = u1;
+        u1 = u2;
+        phi = phi + h;    
+        if rs/u2 > 1
+            phir(end+1)=phi;
+            r(end+1)=rs/u2;
+            x(end+1)=(rs/u2)*cos(phi);
+            y(end+1)=(rs/u2)*sin(phi);
+        elseif rs/u2 == 1
+            phir(end+1)=phi;
+            r(end+1)=rs/u2;
+            x(end+1)=(rs/u2)*cos(phi);
+            y(end+1)=(rs/u2)*sin(phi);
+            yn = 0;
+        else
+            yn = 0;
+        end;
     end;
-end;
-plot(x,y,'blue')
+    plot(x,y,'blue')
 end;
 plot(cos(0:0.01:2*pi),sin(0:0.01:2*pi),'r')
 plot(2,-100:.01:100,'red')
